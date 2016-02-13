@@ -354,7 +354,9 @@ module.run(['$templateCache', function($templateCache) {
                     epochLocal: scope.ipDate.getTime(),
                     epochUTC: (scope.ipDate.getTime() + (scope.ipDate.getTimezoneOffset() * 60 * 1000))
                 };
-                scope.dateSelected(selectedInputDateObject);
+                if (scope.inputObj.inputDate) {
+                    scope.dateSelected(selectedInputDateObject);
+                }
 
                 // Watch for selected date change
                 // scope.$watch('date_selection.selectedDate', function (newVal, oldVal) {
