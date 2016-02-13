@@ -298,6 +298,16 @@
                     scope.date_selection.selected = true;
                     scope.date_selection.selectedDate = new Date(date.dateString);
                     scope.selectedDateFull = scope.date_selection.selectedDate;
+
+                    if (scope.closeOnSelect) {
+                        dateSelected();
+                        if (scope.templateType.toLowerCase() === 'modal' && scope.modal) {
+                          scope.closeModal();
+                        }
+                        else if(scope.popup) {
+                          scope.popup.close();
+                        }
+                    }
                 };
 
                 var selectedInputDateObject = {
@@ -313,20 +323,20 @@
                 scope.dateSelected(selectedInputDateObject);
 
                 // Watch for selected date change
-                scope.$watch('date_selection.selectedDate', function (newVal, oldVal) {
-                    // Close modal/popup if date selected
-                    if (scope.closeOnSelect) {
+                // scope.$watch('date_selection.selectedDate', function (newVal, oldVal) {
+                //     // Close modal/popup if date selected
+                //     if (scope.closeOnSelect) {
 
-                        dateSelected();
+                //         dateSelected();
 
-                        if (scope.templateType.toLowerCase() === 'modal' && scope.modal) {
-                          scope.closeModal();
-                        }
-                        else if(scope.popup) {
-                          scope.popup.close();
-                        }
-                    }
-                });
+                //         if (scope.templateType.toLowerCase() === 'modal' && scope.modal) {
+                //           scope.closeModal();
+                //         }
+                //         else if(scope.popup) {
+                //           scope.popup.close();
+                //         }
+                //     }
+                // });
 
                 //Called when the user clicks on any date.
                 function dateCleared() {
@@ -340,6 +350,8 @@
                     scope.inputObj.callback(undefined);
                     // Please handle null/undefined condition in call back
                 }
+
+
                 //Called when the user clicks on any date.
                 function dateSelected() {
                     scope.date_selection.submitted = true;
