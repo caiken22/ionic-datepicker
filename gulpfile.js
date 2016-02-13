@@ -14,21 +14,27 @@ gulp.task('html2js', function () {
     }))
     .pipe(concat("templates.js"))
     //.pipe(uglify())
-    .pipe(gulp.dest("./dist"));
+    .pipe(gulp.dest("./tmp"));
 });
 
 gulp.task('css2js', function () {
   return gulp.src("./src/*.css")
     .pipe(css2js())
     .pipe(uglify())
-    .pipe(gulp.dest("./dist/"));
+    .pipe(gulp.dest("./tmp/"));
 });
 
 gulp.task('make-bundle', ['del', 'html2js', 'css2js'], function () {
-  return gulp.src(['dist/*', './src/*.js'])
-    .pipe(concat('ionic-datepicker.bundle.min.js'))
-    .pipe(uglify())
+  return gulp.src(['tmp/*', './src/*.js'])
+    .pipe(concat('ionic-datepicker.bundle.js'))
     .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('build', ['del-temp-files'], function () {
+  return gulp.src(['dist/ionic-datepicker.bundle.js'])
+      .pipe(concat('ionic-datepicker.bundle.min.js'))
+      .pipe(uglify())
+      .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('del-temp-files', ['make-bundle'], function () {
@@ -36,8 +42,5 @@ gulp.task('del-temp-files', ['make-bundle'], function () {
 });
 
 gulp.task('del', function () {
-  del(['dist/*']);
+  del(['dist/*', 'tmp/*']);
 });
-
-gulp.task('build', ['del-temp-files']);
-
