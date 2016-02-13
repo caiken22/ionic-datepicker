@@ -1,5 +1,6 @@
 The MIT License (MIT)
 
+Based on the ionic-datepicker
 Copyright (c) 2015 Rajeshwar Patlolla
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

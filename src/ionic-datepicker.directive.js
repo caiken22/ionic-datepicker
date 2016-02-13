@@ -1,4 +1,4 @@
-//By Rajeshwar Patlolla - rajeshwar.patlolla@gmail.com
+//Based on ionic Datepicker by  Rajeshwar Patlolla - rajeshwar.patlolla@gmail.com
 //https://github.com/rajeshwarpatlolla
 
 (function () {
@@ -17,11 +17,11 @@
                 inputObj: "=inputObj"
             },
             link: function (scope, element, attrs) {
-                
-                if(typeOf scope.inputObj.inputDate === 'string'){
+
+                if(typeof scope.inputObj.inputDate === 'string'){
                     scope.inputObj.inputDate = new Date(scope.inputObj.inputDate);
                 }
-                
+
                 scope.currentMonth = '';
                 scope.currentYear = '';
                 scope.disabledDates = [];
